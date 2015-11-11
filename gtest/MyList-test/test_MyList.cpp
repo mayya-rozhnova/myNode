@@ -22,3 +22,12 @@ TEST(MyList, CreateList) {
   }
   EXPECT_EQ(kListSize, k);
 }
+
+TEST(MyList, DelElem) {
+  int vals1[6]={1,2,3,4,5,6};
+  CNode *p1 = CreateList(6, vals1);
+  int vals2[5]={1,2,4,5,6};
+  CNode *p2= CreateList(5, vals2);
+  DelElem(&p1, 3);
+  EXPECT_EQ(true, compare(p1, p2));
+}
