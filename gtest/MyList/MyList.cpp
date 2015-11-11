@@ -34,3 +34,25 @@ void DelElem (CNode **pf, int n) {
 		delete t;
 }
 
+//Функции, которые нужны для теста
+int size(CNode *pf) {
+  int Size = 0;
+  while (pf != 0) {
+    pf = pf->next;
+    Size++;
+  }
+  return Size;
+}
+
+bool compare(CNode *pf1, CNode *pf2) {
+  if (size(pf1) != size(pf2))
+    return false;
+  else
+    while (pf1 != 0 && pf2 != 0) {
+      if ((pf1->val) != (pf2->val))
+        return false;
+      pf1 = pf1->next;
+      pf2 = pf2->next;
+    }
+  return true;
+}
