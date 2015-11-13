@@ -17,17 +17,19 @@ CNode* CreateList(int count, const int* vals) {
 }
 
 void DelElem (CNode **pf, int n) {
-	if (n == 1) {
-		CNode *tmp = *pf;
+	if (pf == NULL)
+		return;
+	CNode *tmp = *pf;
+
+	if (tmp->val == n) {
 		CNode *t = *pf;
 		tmp = tmp->next;
 		*pf = tmp;
 		delete t;
 		return;
 	}
-	CNode *tmp = *pf;
 	CNode *t = 0;
-	while (tmp != 0 && tmp->val != (n - 1))
+	while ((tmp != 0) && (tmp->next->val != n))
 		tmp = tmp->next;
 		t = tmp->next;
 		tmp->next = t->next;
