@@ -53,7 +53,7 @@ TEST(MyList, can_delete_last_element_in_list) {
 TEST(MyList, can_delete_several_elements_in_list) {
   int vals1[5]={1,2,3,4,5};
   CNode *p1 = CreateList(5, vals1);
-  int vals2[4]={1,3,4};
+  int vals2[3]={1,3,4};
   CNode *p2= CreateList(3, vals2);
   DelElem(&p1, 2);
   DelElem(&p1, 5);
