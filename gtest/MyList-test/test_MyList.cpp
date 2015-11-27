@@ -70,3 +70,13 @@ TEST(MyList, can_delete_several_elements_in_list) {
   EXPECT_EQ(true, compare(p1, p2));
 }
 
+ TEST(MyList, can_sort_list) {
+	 int vals1[10]={8,10,7,1,3,4,6,2,5,9};
+	 CNode *p1 = CreateList(10, vals1);
+	 int vals2[10]={1,2,3,4,5,6,7,8,9,10};
+	 CNode *p2= CreateList(3, vals2);
+	 sort(p1);
+	 EXPECT_EQ(true, compare(p1, p2));
+ }
+
+

@@ -36,6 +36,29 @@ void DelElem (CNode **pf, int n) {
 		delete t;
 }
 
+//сортировка
+
+void sort(CNode **pfirst) {
+	CNode *pf = *pfirst;
+	int min = pf->val;
+	CNode *tmpMin = 0, *prev = 0;
+	while (pf->next != 0) {
+		if (pf->val < min) {
+			min = pf->val;
+			tmpMin = prev;
+		}
+		prev = pf;
+		*pf = *pf->next;
+	}
+	CNode *tmp = tmpMin;
+	pf->val = tmpMin->val;
+
+
+	
+
+
+}
+
 //Функции, которые нужны для теста
 int size(CNode *pf) {
   int Size = 0;
