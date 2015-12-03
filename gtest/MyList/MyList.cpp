@@ -58,3 +58,52 @@ bool compare(CNode *pf1, CNode *pf2) {
     }
   return true;
 }
+
+void sort(CNode **pf) {
+  if (*pf == 0) {
+    throw std::exception("Empty node");
+  }
+
+  if ((*pf)->next == 0) {
+    return;
+  }
+
+  if ((*pf)->next->next == 0) {
+    if ((*pf)->val > (*pf)->next->val) {
+      CNode *tmp = (*pf)->next;
+      (*pf)->next->next = (*pf);
+      (*pf)->next = 0;
+      (*pf) = tmp;
+    }
+    return;
+  }
+
+  CNode *tmp;
+  int f = 0;
+  while (f == 0) {
+    f = 1;
+    tmp = (*pf);
+    if (tmp->val > tmp->next->val) {
+      f = 0;
+      CNode *tmp2 = (*pf)->next;
+      CNode *tmp3 = (*pf)->next->next;
+      (*pf)->next->next = (*pf);
+      (*pf)->next = tmp3;
+	  (*pf) = tmp2;
+    }
+
+    while (tmp->next->next != 0) {
+      if (tmp->next->val > tmp->next->next->val) {
+        CNode *tmp1, *tmp2, *tmp3;
+          f = 0;
+          tmp1 = tmp->next;
+          tmp2 = tmp->next->next;
+          tmp3 = tmp->next->next->next;
+          tmp2->next = tmp1;
+          tmp1->next = tmp3;
+          tmp->next = tmp2;
+       }
+       tmp = tmp->next;
+    }
+  }
+}
