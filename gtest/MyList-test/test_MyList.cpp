@@ -1,4 +1,4 @@
-#include "MyList.h"
+﻿#include "MyList.h"
 #include <gtest.h>
 
 TEST(MyList, CreateEmptyList) {
@@ -118,5 +118,62 @@ TEST(MyList_sort, can_sort_node_with_3_elements) {
   CNode *head1 = CreateList(5, vals1);
   sort(&head);
   EXPECT_EQ(true, compare(head, head1));
+}
+
+ //
+ TEST(MyList, Can_create_list_with_positive_size) {
+  ASSERT_NO_THROW(List l(10));
+}
+
+TEST(MyList, Cant_create_list_with_negative_size) {
+  ASSERT_ANY_THROW(List l(-10));
+}
+
+TEST(MyList, Can_add_element) {
+  List l(1);
+  l.Add(10);
+  l.Movenext();
+  EXPECT_EQ(10, l.data[l.current]);
+}
+
+TEST(MyList, Cant_add_element_to_full_list) {
+  List l(1);
+  l.Add(10);
+  l.Movenext();
+  ASSERT_ANY_THROW(l.Add(9));
+}
+
+TEST(MyList, Cant_delete_element_from_empty_list) {
+  List l(1);
+  ASSERT_ANY_THROW(l.Del());
+}
+
+TEST(MyList, Can_delete_element_from_list) {
+  List l(2);
+  l.Add(10);
+  l.Movenext();
+  l.Add(9);
+  l.Movenext();
+  l.Movenext();
+  l.Movenext();
+  l.Del();
+  EXPECT_EQ(0, l.index[l.current]);
+}
+
+TEST(MyList_2, Can_delete_element_from_list) {
+  List l(5);
+  l.Add(2);
+  l.Movenext();
+  l.Add(4);
+  l.Movenext();
+  l.Add(6);
+  l.Movenext();
+  l.Add(8);
+  l.Movenext();
+  l.Add(10);
+  l.print();
+  l.DelElem2(6);
+  cout<<endl;
+  l.print();
 }
 
