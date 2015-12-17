@@ -120,3 +120,133 @@ TEST(MyList_sort, can_sort_node_with_3_elements) {
   EXPECT_EQ(true, compare(head, head1));
 }
 
+TEST(MyList_list2, Can_create_list_with_positive_size) {
+  ASSERT_NO_THROW(List l(7));
+}
+
+TEST(MyList_list2, Cant_create_list_with_negative_size) {
+  ASSERT_ANY_THROW(List l(-5));
+}
+
+TEST(MyList_list2, Can_add_element) {
+  List l(1);
+  l.Add(5);
+  l.Movenext();
+  EXPECT_EQ(5, l.data[l.curr]);
+}
+
+TEST(MyList_list2, Cant_add_element_to_full_list) {
+  List l(2);
+  l.Add(5);
+  l.Movenext();
+  l.Add(4);
+  l.Movenext();
+  ASSERT_ANY_THROW(l.Add(3));
+}
+
+TEST(MyList_list2, Cant_delete_element_from_empty_list) {
+  List l(1);
+  ASSERT_ANY_THROW(l.Del());
+}
+
+TEST(MyList_list2, Can_delete_element_from_list) {
+  List l(2);
+  l.Add(3);
+  l.Movenext();
+  l.Add(5);
+  l.Movenext();
+  l.Movenext();
+  l.Movenext();
+  l.Del();
+  EXPECT_EQ(0, l.index[l.curr]);
+}
+
+TEST(MyList_funcs2, Cant_delete_element_from_empty_list) {
+  List l(1);
+  ASSERT_ANY_THROW(l.DelElem2(5));
+}
+
+TEST(MyList_funcs2, Can_delete_only_element_from_list) {
+  List l(1);
+  l.Add(7);
+  l.DelElem2(7);
+  EXPECT_EQ(0, l.data[l.index[0]]);
+  
+}
+
+TEST(MyList_funcs2, Can_delete_first_element_from_list) {
+  List l(5);
+  l.Add(2);
+  l.Movenext();
+  l.Add(4);
+  l.Movenext();
+  l.Add(6);
+  l.Movenext();
+  l.Add(8);
+  l.Movenext();
+  l.Add(10);
+  l.DelElem2(2);
+  EXPECT_EQ(4, l.data[l.index[0]]);
+}
+
+TEST(MyList_funcs2, Can_delete_second_element_from_list) {
+  List l(5);
+  l.Add(2);
+  l.Movenext();
+  l.Add(4);
+  l.Movenext();
+  l.Add(6);
+  l.Movenext();
+  l.Add(8);
+  l.Movenext();
+  l.Add(10);
+  l.DelElem2(4);
+  l.curr = l.index[0];
+  l.Movenext();
+  EXPECT_EQ(6, l.data[l.curr]);
+}
+
+TEST(MyList_funcs2, Can_delete_third_element_from_list) {
+  List l(5);
+  l.Add(2);
+  l.Movenext();
+  l.Add(4);
+  l.Movenext();
+  l.Add(6);
+  l.Movenext();
+  l.Add(8);
+  l.Movenext();
+  l.Add(10);
+  l.DelElem2(6);
+  l.curr = l.index[0];
+  l.Movenext();
+  l.Movenext();
+  EXPECT_EQ(8, l.data[l.curr]);
+}
+
+TEST(MyList_funcs2, Can_delete_last_element_from_list) {
+  List l(5);
+  l.Add(2);
+  l.Movenext();
+  l.Add(4);
+  l.Movenext();
+  l.Add(6);
+  l.Movenext();
+  l.Add(8);
+  l.Movenext();
+  l.Add(10);
+  l.DelElem2(10);
+  EXPECT_EQ(0, l.index[l.curr]);
+}
+
+TEST(MyList_funcs2, Cant_delete_absent_element_from_list) {
+  List l(4);
+  l.Add(2);
+  l.Movenext();
+  l.Add(4);
+  l.Movenext();
+  l.Add(6);
+  l.Movenext();
+  l.Add(8);  
+  ASSERT_ANY_THROW(l.DelElem2(5));
+}

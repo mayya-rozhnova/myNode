@@ -107,3 +107,83 @@ void sort(CNode **pf) {
     }
   }
 }
+
+List::List(int n) {
+  if (n <= 0)
+    throw std::exception("Wrong size");
+  data = new double[n + 2];
+  index = new int[n + 2];
+  curr = 0;
+  index[0] = 0;
+  for (int i = 1; i < n + 1; i++)
+    index[i] = i + 1;
+  index[n + 1] = 1;
+}
+
+List::~List() {
+	delete[]data;
+	delete[]index;
+}
+
+void List::Movenext() {
+	curr = index[curr];
+}
+
+void List::print() {
+	int i = index[0];
+	while (i != 0) {
+		cout<<data[i]<<endl;
+		i = index[i];
+	}
+}
+
+void List::DelFreeNode(int i) {
+  int tmp = index[i];
+  index[i] = index[tmp];
+  index[tmp] = -1;
+}
+
+void List::AddNewNode(int i, int j) {
+  int tmp = index[i];
+  index[i] = j;
+  index[j] = tmp;
+}
+
+void List::Add(double l) {
+  if (index[1] == 1)
+    throw std::exception("Full List");
+  int tmp = index[1]; 
+  this->DelFreeNode(1);
+  this->AddNewNode(curr, tmp);
+  data[tmp] = l;
+}
+
+void List::Del() {
+  if (index[0] == 0)
+    throw std::exception("No elements in list");
+  if (index[curr] == 0)
+    this->Movenext();
+  int tmp = index[curr]; 
+  this->DelFreeNode(curr);
+  this->AddNewNode(1, tmp);
+}
+
+void List::DelElem2(int n) {
+	if (index[0] == 0)
+		throw std::exception("No elements in list");
+	int i = index[0];
+	if (data[i] == n) {
+		this->DelFreeNode(0);
+		this->AddNewNode(1, i);
+		return;
+	}
+
+	while (i != 0 && data[index[i]] != n) {
+		if(index[i] == 0)
+			throw std::exception("Element is absent");
+		i = index[i];
+	}
+	int tmp = index[i];
+	this->DelFreeNode(i);
+	this->AddNewNode(1, tmp);
+}
